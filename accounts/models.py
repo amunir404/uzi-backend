@@ -21,10 +21,6 @@ class UserAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **kwargs):
-        """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
-        """
         user = self.create_user(
             email,
             password=password,
@@ -45,7 +41,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     role = models.CharField(
         max_length=20, choices=Role.choices, default=Role.INVESTOR)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     objects = UserAccountManager()
